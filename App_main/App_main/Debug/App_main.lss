@@ -1,0 +1,773 @@
+
+App_main.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0000047a  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000004  00800060  0000047a  0000050e  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000009  00800064  00800064  00000512  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  00000512  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000544  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 00000070  00000000  00000000  00000580  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   00000cda  00000000  00000000  000005f0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 0000076b  00000000  00000000  000012ca  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   0000052d  00000000  00000000  00001a35  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  00000148  00000000  00000000  00001f64  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    00000471  00000000  00000000  000020ac  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    00000606  00000000  00000000  0000251d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000078  00000000  00000000  00002b23  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   8:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  10:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  14:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  18:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  1c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  20:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  24:	0c 94 05 01 	jmp	0x20a	; 0x20a <__vector_9>
+  28:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  2c:	0c 94 3e 01 	jmp	0x27c	; 0x27c <__vector_11>
+  30:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  34:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  38:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  3c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  40:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  44:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  48:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  4c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  50:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	ea e7       	ldi	r30, 0x7A	; 122
+  68:	f4 e0       	ldi	r31, 0x04	; 4
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	a4 36       	cpi	r26, 0x64	; 100
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+
+00000076 <__do_clear_bss>:
+  76:	20 e0       	ldi	r18, 0x00	; 0
+  78:	a4 e6       	ldi	r26, 0x64	; 100
+  7a:	b0 e0       	ldi	r27, 0x00	; 0
+  7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
+
+0000007e <.do_clear_bss_loop>:
+  7e:	1d 92       	st	X+, r1
+
+00000080 <.do_clear_bss_start>:
+  80:	ad 36       	cpi	r26, 0x6D	; 109
+  82:	b2 07       	cpc	r27, r18
+  84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
+  86:	0e 94 82 00 	call	0x104	; 0x104 <main>
+  8a:	0c 94 3b 02 	jmp	0x476	; 0x476 <_exit>
+
+0000008e <__bad_interrupt>:
+  8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000092 <timer1_init>:
+	sterowanie &= ~(1<<RS);    //RS=0 czyli instrukcje
+	LCD_zapis(co);
+}
+void LCD_xy(int x, int y)
+{
+	LCD_zapis_KOM(0x80+y+x);	//instrukcja do ustawienia wspolrzednych x/y
+  92:	1f bc       	out	0x2f, r1	; 47
+  94:	1e bc       	out	0x2e, r1	; 46
+  96:	8e b5       	in	r24, 0x2e	; 46
+  98:	85 60       	ori	r24, 0x05	; 5
+  9a:	8e bd       	out	0x2e, r24	; 46
+  9c:	89 b7       	in	r24, 0x39	; 57
+  9e:	84 60       	ori	r24, 0x04	; 4
+  a0:	89 bf       	out	0x39, r24	; 57
+  a2:	87 ef       	ldi	r24, 0xF7	; 247
+  a4:	92 ec       	ldi	r25, 0xC2	; 194
+  a6:	9d bd       	out	0x2d, r25	; 45
+  a8:	8c bd       	out	0x2c, r24	; 44
+  aa:	08 95       	ret
+
+000000ac <LCD_zapis>:
+  ac:	8b bb       	out	0x1b, r24	; 27
+  ae:	a9 9a       	sbi	0x15, 1	; 21
+  b0:	85 e0       	ldi	r24, 0x05	; 5
+  b2:	8a 95       	dec	r24
+  b4:	f1 f7       	brne	.-4      	; 0xb2 <LCD_zapis+0x6>
+  b6:	00 00       	nop
+  b8:	a9 98       	cbi	0x15, 1	; 21
+  ba:	85 ed       	ldi	r24, 0xD5	; 213
+  bc:	8a 95       	dec	r24
+  be:	f1 f7       	brne	.-4      	; 0xbc <LCD_zapis+0x10>
+  c0:	00 00       	nop
+  c2:	08 95       	ret
+
+000000c4 <LCD_zapis_ASCII>:
+  c4:	a8 9a       	sbi	0x15, 0	; 21
+  c6:	0e 94 56 00 	call	0xac	; 0xac <LCD_zapis>
+  ca:	08 95       	ret
+
+000000cc <LCD_zapis_KOM>:
+  cc:	a8 98       	cbi	0x15, 0	; 21
+  ce:	0e 94 56 00 	call	0xac	; 0xac <LCD_zapis>
+  d2:	08 95       	ret
+
+000000d4 <LCD_putstr>:
+}
+
+//wysylamy ciag znaków
+void LCD_putstr(char* s)
+{
+  d4:	cf 93       	push	r28
+  d6:	df 93       	push	r29
+	register char c;
+	while ((c = *s++))	//petla po lancuchu znaków ,póki nie 0 wysy³amy kolejny znak na lcd
+  d8:	ec 01       	movw	r28, r24
+  da:	21 96       	adiw	r28, 0x01	; 1
+  dc:	fc 01       	movw	r30, r24
+  de:	80 81       	ld	r24, Z
+  e0:	88 23       	and	r24, r24
+  e2:	29 f0       	breq	.+10     	; 0xee <LCD_putstr+0x1a>
+		LCD_zapis_ASCII(c);
+  e4:	0e 94 62 00 	call	0xc4	; 0xc4 <LCD_zapis_ASCII>
+
+//wysylamy ciag znaków
+void LCD_putstr(char* s)
+{
+	register char c;
+	while ((c = *s++))	//petla po lancuchu znaków ,póki nie 0 wysy³amy kolejny znak na lcd
+  e8:	89 91       	ld	r24, Y+
+  ea:	81 11       	cpse	r24, r1
+  ec:	fb cf       	rjmp	.-10     	; 0xe4 <LCD_putstr+0x10>
+		LCD_zapis_ASCII(c);
+}
+  ee:	df 91       	pop	r29
+  f0:	cf 91       	pop	r28
+  f2:	08 95       	ret
+
+000000f4 <timer0_init>:
+//jezeli preskaler 1024, to jeden krok 0,000064 s czyli przepe³nienie calego timera (256 kroków) 0,016384 s
+//zeby zak³ócenia/drgania ze styków wyeliminowaæ mozna sprawdzac stan przyciskó co ok 200 ms czyli co okolo 12 przepelnien timera
+
+void timer0_init() {
+    // Ustawienie preskalera na 1024 (64 us na tick przy F_CPU = 16 MHz)
+    TCCR0 |= (1 << CS02) | (1 << CS00);
+  f4:	83 b7       	in	r24, 0x33	; 51
+  f6:	85 60       	ori	r24, 0x05	; 5
+  f8:	83 bf       	out	0x33, r24	; 51
+    // W³¹czenie przerwañ dla przepe³nienia Timer0
+    TIMSK |= (1 << TOIE0);
+  fa:	89 b7       	in	r24, 0x39	; 57
+  fc:	81 60       	ori	r24, 0x01	; 1
+  fe:	89 bf       	out	0x39, r24	; 57
+	TCNT0 = 0 ;
+ 100:	12 be       	out	0x32, r1	; 50
+ 102:	08 95       	ret
+
+00000104 <main>:
+}
+
+int main(void)
+{
+ 104:	cf 93       	push	r28
+ 106:	df 93       	push	r29
+ 108:	00 d0       	rcall	.+0      	; 0x10a <main+0x6>
+ 10a:	00 d0       	rcall	.+0      	; 0x10c <main+0x8>
+ 10c:	cd b7       	in	r28, 0x3d	; 61
+ 10e:	de b7       	in	r29, 0x3e	; 62
+	timer1_init();
+ 110:	0e 94 49 00 	call	0x92	; 0x92 <timer1_init>
+	timer0_init();
+ 114:	0e 94 7a 00 	call	0xf4	; 0xf4 <timer0_init>
+	sei();
+ 118:	78 94       	sei
+
+	magistralaDDR = 0xff;
+ 11a:	1f ef       	ldi	r17, 0xFF	; 255
+ 11c:	1a bb       	out	0x1a, r17	; 26
+	sterowanieDDR |= (1<<RS)|(1<<E) | (1 << BUZZER);
+ 11e:	84 b3       	in	r24, 0x14	; 20
+ 120:	87 60       	ori	r24, 0x07	; 7
+ 122:	84 bb       	out	0x14, r24	; 20
+	sterowanie &= ~(1<<RS);    //RS=0
+ 124:	a8 98       	cbi	0x15, 0	; 21
+	LCD_zapis(0x38);		//magistrala 8-bitowa      00111000 = 0x38(hex)   (okienko jest 5 na 7)
+ 126:	88 e3       	ldi	r24, 0x38	; 56
+ 128:	0e 94 56 00 	call	0xac	; 0xac <LCD_zapis>
+	LCD_zapis(0x06);				//inkrementacja	adresu						00000110=0x06
+ 12c:	86 e0       	ldi	r24, 0x06	; 6
+ 12e:	0e 94 56 00 	call	0xac	; 0xac <LCD_zapis>
+	LCD_zapis(0x0C);			//wlaczenie wyswietlacza i wylaczenie kursora
+ 132:	8c e0       	ldi	r24, 0x0C	; 12
+ 134:	0e 94 56 00 	call	0xac	; 0xac <LCD_zapis>
+	LCD_zapis(0x01);			//czyszczenie ekranu
+ 138:	81 e0       	ldi	r24, 0x01	; 1
+ 13a:	0e 94 56 00 	call	0xac	; 0xac <LCD_zapis>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 13e:	8f e3       	ldi	r24, 0x3F	; 63
+ 140:	9f e1       	ldi	r25, 0x1F	; 31
+ 142:	01 97       	sbiw	r24, 0x01	; 1
+ 144:	f1 f7       	brne	.-4      	; 0x142 <main+0x3e>
+ 146:	00 c0       	rjmp	.+0      	; 0x148 <main+0x44>
+ 148:	00 00       	nop
+	_delay_ms(2);				//bo trzeba poczekac 2ms
+	
+	// przyciski - port D - wejscie i w³¹czenie pull-up resistorów  
+	DDRD = 0x00;
+ 14a:	11 ba       	out	0x11, r1	; 17
+	PORTD = 0xFF;
+ 14c:	12 bb       	out	0x12, r17	; 18
+	TCNT1 = (65536 - 15625) ;	//ustawiamy stan poczatkowy tak zeby odliczyc 15625 kroków
+
+}
+
+void secondsToMinutesAndSeconds(int totalSeconds, int *minutes, int *seconds) {
+	*minutes = totalSeconds / 60;   // Obliczanie minut (dzielenie ca³kowite)
+ 14e:	0f 2e       	mov	r0, r31
+ 150:	fc e3       	ldi	r31, 0x3C	; 60
+ 152:	8f 2e       	mov	r8, r31
+ 154:	91 2c       	mov	r9, r1
+ 156:	f0 2d       	mov	r31, r0
+ 158:	8f e9       	ldi	r24, 0x9F	; 159
+ 15a:	9f e0       	ldi	r25, 0x0F	; 15
+ 15c:	01 97       	sbiw	r24, 0x01	; 1
+ 15e:	f1 f7       	brne	.-4      	; 0x15c <main+0x58>
+ 160:	00 c0       	rjmp	.+0      	; 0x162 <main+0x5e>
+ 162:	00 00       	nop
+	while (1)
+	{
+		_delay_ms(1);
+
+		 int min, sec;
+		 secondsToMinutesAndSeconds(timer_sekundy, &min, &sec);
+ 164:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 168:	90 91 61 00 	lds	r25, 0x0061	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
+	TCNT1 = (65536 - 15625) ;	//ustawiamy stan poczatkowy tak zeby odliczyc 15625 kroków
+
+}
+
+void secondsToMinutesAndSeconds(int totalSeconds, int *minutes, int *seconds) {
+	*minutes = totalSeconds / 60;   // Obliczanie minut (dzielenie ca³kowite)
+ 16c:	b4 01       	movw	r22, r8
+ 16e:	0e 94 de 01 	call	0x3bc	; 0x3bc <__divmodhi4>
+ 172:	a6 2e       	mov	r10, r22
+ 174:	b7 2e       	mov	r11, r23
+ 176:	c8 2e       	mov	r12, r24
+ 178:	d9 2e       	mov	r13, r25
+ 17a:	e6 2e       	mov	r14, r22
+ 17c:	f7 2e       	mov	r15, r23
+	*seconds = totalSeconds % 60;   // Obliczanie pozosta³ych sekund (reszta z dzielenia przez 60)
+ 17e:	08 2f       	mov	r16, r24
+ 180:	19 2f       	mov	r17, r25
+	sterowanie &= ~(1<<RS);    //RS=0 czyli instrukcje
+	LCD_zapis(co);
+}
+void LCD_xy(int x, int y)
+{
+	LCD_zapis_KOM(0x80+y+x);	//instrukcja do ustawienia wspolrzednych x/y
+ 182:	80 e8       	ldi	r24, 0x80	; 128
+ 184:	0e 94 66 00 	call	0xcc	; 0xcc <LCD_zapis_KOM>
+		 int min, sec;
+		 secondsToMinutesAndSeconds(timer_sekundy, &min, &sec);
+		 char str[4];       // Tablica o rozmiarze 4 (3 cyfry + '\0') do konwersji
+
+		 LCD_xy(0,0);			
+		 if(min < 10) LCD_putstr("0");		//jezeli minuty < 10 to uzupelnianiamy 0 z przodu
+ 188:	9a e0       	ldi	r25, 0x0A	; 10
+ 18a:	e9 16       	cp	r14, r25
+ 18c:	f1 04       	cpc	r15, r1
+ 18e:	24 f4       	brge	.+8      	; 0x198 <main+0x94>
+ 190:	82 e6       	ldi	r24, 0x62	; 98
+ 192:	90 e0       	ldi	r25, 0x00	; 0
+ 194:	0e 94 6a 00 	call	0xd4	; 0xd4 <LCD_putstr>
+    } else if (__radix < 2 || __radix > 36) {
+	*__s = 0;
+	return __s;
+    } else {
+	extern char *__itoa_ncheck (int, char *, unsigned char);
+	return __itoa_ncheck (__val, __s, __radix);
+ 198:	4a e0       	ldi	r20, 0x0A	; 10
+ 19a:	be 01       	movw	r22, r28
+ 19c:	6f 5f       	subi	r22, 0xFF	; 255
+ 19e:	7f 4f       	sbci	r23, 0xFF	; 255
+ 1a0:	8a 2d       	mov	r24, r10
+ 1a2:	9b 2d       	mov	r25, r11
+ 1a4:	0e 94 06 02 	call	0x40c	; 0x40c <__itoa_ncheck>
+		 LCD_putstr(itoa(min, str, 10));	//konwersja liczby dziesiêtnej na wartoœæ znakow¹ metod¹ itoa()
+ 1a8:	0e 94 6a 00 	call	0xd4	; 0xd4 <LCD_putstr>
+	sterowanie &= ~(1<<RS);    //RS=0 czyli instrukcje
+	LCD_zapis(co);
+}
+void LCD_xy(int x, int y)
+{
+	LCD_zapis_KOM(0x80+y+x);	//instrukcja do ustawienia wspolrzednych x/y
+ 1ac:	83 e8       	ldi	r24, 0x83	; 131
+ 1ae:	0e 94 66 00 	call	0xcc	; 0xcc <LCD_zapis_KOM>
+		 LCD_xy(0,0);			
+		 if(min < 10) LCD_putstr("0");		//jezeli minuty < 10 to uzupelnianiamy 0 z przodu
+		 LCD_putstr(itoa(min, str, 10));	//konwersja liczby dziesiêtnej na wartoœæ znakow¹ metod¹ itoa()
+		
+		 LCD_xy(0,3);
+		 if(sec < 10) LCD_putstr("0");
+ 1b2:	0a 30       	cpi	r16, 0x0A	; 10
+ 1b4:	11 05       	cpc	r17, r1
+ 1b6:	24 f4       	brge	.+8      	; 0x1c0 <main+0xbc>
+ 1b8:	82 e6       	ldi	r24, 0x62	; 98
+ 1ba:	90 e0       	ldi	r25, 0x00	; 0
+ 1bc:	0e 94 6a 00 	call	0xd4	; 0xd4 <LCD_putstr>
+ 1c0:	4a e0       	ldi	r20, 0x0A	; 10
+ 1c2:	be 01       	movw	r22, r28
+ 1c4:	6f 5f       	subi	r22, 0xFF	; 255
+ 1c6:	7f 4f       	sbci	r23, 0xFF	; 255
+ 1c8:	8c 2d       	mov	r24, r12
+ 1ca:	9d 2d       	mov	r25, r13
+ 1cc:	0e 94 06 02 	call	0x40c	; 0x40c <__itoa_ncheck>
+		 LCD_putstr(itoa(sec, str, 10));
+ 1d0:	0e 94 6a 00 	call	0xd4	; 0xd4 <LCD_putstr>
+	sterowanie &= ~(1<<RS);    //RS=0 czyli instrukcje
+	LCD_zapis(co);
+}
+void LCD_xy(int x, int y)
+{
+	LCD_zapis_KOM(0x80+y+x);	//instrukcja do ustawienia wspolrzednych x/y
+ 1d4:	82 e8       	ldi	r24, 0x82	; 130
+ 1d6:	0e 94 66 00 	call	0xcc	; 0xcc <LCD_zapis_KOM>
+		 LCD_xy(0,3);
+		 if(sec < 10) LCD_putstr("0");
+		 LCD_putstr(itoa(sec, str, 10));
+		 
+		 LCD_xy(0,2);
+		 if( timer_on)			//jezeli timer wlaczony to uruchamiamy efekt migania :, flaga sek_interrupt zmienia sie w przerwaniu co 1 s 
+ 1da:	80 91 69 00 	lds	r24, 0x0069	; 0x800069 <timer_on>
+ 1de:	90 91 6a 00 	lds	r25, 0x006A	; 0x80006a <timer_on+0x1>
+ 1e2:	89 2b       	or	r24, r25
+ 1e4:	71 f0       	breq	.+28     	; 0x202 <main+0xfe>
+		 {
+			if(sek_interrupt)	LCD_zapis_ASCII(' '); else  LCD_zapis_ASCII(':');
+ 1e6:	80 91 6b 00 	lds	r24, 0x006B	; 0x80006b <sek_interrupt>
+ 1ea:	90 91 6c 00 	lds	r25, 0x006C	; 0x80006c <sek_interrupt+0x1>
+ 1ee:	89 2b       	or	r24, r25
+ 1f0:	21 f0       	breq	.+8      	; 0x1fa <main+0xf6>
+ 1f2:	80 e2       	ldi	r24, 0x20	; 32
+ 1f4:	0e 94 62 00 	call	0xc4	; 0xc4 <LCD_zapis_ASCII>
+ 1f8:	af cf       	rjmp	.-162    	; 0x158 <main+0x54>
+ 1fa:	8a e3       	ldi	r24, 0x3A	; 58
+ 1fc:	0e 94 62 00 	call	0xc4	; 0xc4 <LCD_zapis_ASCII>
+ 200:	ab cf       	rjmp	.-170    	; 0x158 <main+0x54>
+		 } else
+			 LCD_zapis_ASCII(':');
+ 202:	8a e3       	ldi	r24, 0x3A	; 58
+ 204:	0e 94 62 00 	call	0xc4	; 0xc4 <LCD_zapis_ASCII>
+													 	 
+	}
+ 208:	a7 cf       	rjmp	.-178    	; 0x158 <main+0x54>
+
+0000020a <__vector_9>:
+
+}
+
+	
+	//przerwanie co 1 sekunde - 15625 kroków
+	ISR(TIMER1_OVF_vect) {
+ 20a:	1f 92       	push	r1
+ 20c:	0f 92       	push	r0
+ 20e:	0f b6       	in	r0, 0x3f	; 63
+ 210:	0f 92       	push	r0
+ 212:	11 24       	eor	r1, r1
+ 214:	2f 93       	push	r18
+ 216:	3f 93       	push	r19
+ 218:	8f 93       	push	r24
+ 21a:	9f 93       	push	r25
+
+		sek_interrupt = !sek_interrupt; //flaga odliczania kolejnej sekundy (do migania)
+ 21c:	81 e0       	ldi	r24, 0x01	; 1
+ 21e:	90 e0       	ldi	r25, 0x00	; 0
+ 220:	20 91 6b 00 	lds	r18, 0x006B	; 0x80006b <sek_interrupt>
+ 224:	30 91 6c 00 	lds	r19, 0x006C	; 0x80006c <sek_interrupt+0x1>
+ 228:	23 2b       	or	r18, r19
+ 22a:	11 f0       	breq	.+4      	; 0x230 <__vector_9+0x26>
+ 22c:	80 e0       	ldi	r24, 0x00	; 0
+ 22e:	90 e0       	ldi	r25, 0x00	; 0
+ 230:	90 93 6c 00 	sts	0x006C, r25	; 0x80006c <sek_interrupt+0x1>
+ 234:	80 93 6b 00 	sts	0x006B, r24	; 0x80006b <sek_interrupt>
+
+		if(timer_on)	//jezeli timer wlaczony zmniejszamy liczbe sekund o jeden ,jezeli zeszlismy do 0 wlaczamy brzeczek
+ 238:	80 91 69 00 	lds	r24, 0x0069	; 0x800069 <timer_on>
+ 23c:	90 91 6a 00 	lds	r25, 0x006A	; 0x80006a <timer_on+0x1>
+ 240:	89 2b       	or	r24, r25
+ 242:	79 f0       	breq	.+30     	; 0x262 <__vector_9+0x58>
+		{
+			if(timer_sekundy > 0)
+ 244:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 248:	90 91 61 00 	lds	r25, 0x0061	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
+ 24c:	18 16       	cp	r1, r24
+ 24e:	19 06       	cpc	r1, r25
+ 250:	44 f4       	brge	.+16     	; 0x262 <__vector_9+0x58>
+			{
+				timer_sekundy--;
+ 252:	01 97       	sbiw	r24, 0x01	; 1
+ 254:	90 93 61 00 	sts	0x0061, r25	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
+ 258:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
+				if(timer_sekundy == 0 )
+ 25c:	89 2b       	or	r24, r25
+ 25e:	09 f4       	brne	.+2      	; 0x262 <__vector_9+0x58>
+					sterowanie |= (1<<BUZZER);  
+ 260:	aa 9a       	sbi	0x15, 2	; 21
+			}
+		}
+		// Ponowne ustawienie wartoœci startowej licznika
+		TCNT1 = (65536 - 15625) ;
+ 262:	87 ef       	ldi	r24, 0xF7	; 247
+ 264:	92 ec       	ldi	r25, 0xC2	; 194
+ 266:	9d bd       	out	0x2d, r25	; 45
+ 268:	8c bd       	out	0x2c, r24	; 44
+	}
+ 26a:	9f 91       	pop	r25
+ 26c:	8f 91       	pop	r24
+ 26e:	3f 91       	pop	r19
+ 270:	2f 91       	pop	r18
+ 272:	0f 90       	pop	r0
+ 274:	0f be       	out	0x3f, r0	; 63
+ 276:	0f 90       	pop	r0
+ 278:	1f 90       	pop	r1
+ 27a:	18 95       	reti
+
+0000027c <__vector_11>:
+
+	//obsluga przyciskow
+	ISR(TIMER0_OVF_vect) {
+ 27c:	1f 92       	push	r1
+ 27e:	0f 92       	push	r0
+ 280:	0f b6       	in	r0, 0x3f	; 63
+ 282:	0f 92       	push	r0
+ 284:	11 24       	eor	r1, r1
+ 286:	2f 93       	push	r18
+ 288:	3f 93       	push	r19
+ 28a:	4f 93       	push	r20
+ 28c:	5f 93       	push	r21
+ 28e:	6f 93       	push	r22
+ 290:	7f 93       	push	r23
+ 292:	8f 93       	push	r24
+ 294:	9f 93       	push	r25
+ 296:	af 93       	push	r26
+ 298:	bf 93       	push	r27
+
+	 timer0_overflow_count++;
+ 29a:	80 91 67 00 	lds	r24, 0x0067	; 0x800067 <timer0_overflow_count>
+ 29e:	90 91 68 00 	lds	r25, 0x0068	; 0x800068 <timer0_overflow_count+0x1>
+ 2a2:	01 96       	adiw	r24, 0x01	; 1
+ 2a4:	90 93 68 00 	sts	0x0068, r25	; 0x800068 <timer0_overflow_count+0x1>
+ 2a8:	80 93 67 00 	sts	0x0067, r24	; 0x800067 <timer0_overflow_count>
+	 if (timer0_overflow_count >= 14)	//odliczono 14 przerwan - 14 * 0,016384 okolo 220 ms (doswiadczalnie)
+ 2ac:	80 91 67 00 	lds	r24, 0x0067	; 0x800067 <timer0_overflow_count>
+ 2b0:	90 91 68 00 	lds	r25, 0x0068	; 0x800068 <timer0_overflow_count+0x1>
+ 2b4:	0e 97       	sbiw	r24, 0x0e	; 14
+ 2b6:	08 f4       	brcc	.+2      	; 0x2ba <__vector_11+0x3e>
+ 2b8:	72 c0       	rjmp	.+228    	; 0x39e <__vector_11+0x122>
+
+	 {
+			timer0_overflow_count = 0;
+ 2ba:	10 92 68 00 	sts	0x0068, r1	; 0x800068 <timer0_overflow_count+0x1>
+ 2be:	10 92 67 00 	sts	0x0067, r1	; 0x800067 <timer0_overflow_count>
+
+			// Odczyt stanu przycisków
+			button1_state = (PIND & (1 << BUTTON1_PIN)) ? 1 : 0;
+ 2c2:	80 b3       	in	r24, 0x10	; 16
+ 2c4:	85 fb       	bst	r24, 5
+ 2c6:	88 27       	eor	r24, r24
+ 2c8:	80 f9       	bld	r24, 0
+ 2ca:	80 93 66 00 	sts	0x0066, r24	; 0x800066 <button1_state>
+			button2_state = (PIND & (1 << BUTTON2_PIN)) ? 1 : 0;
+ 2ce:	80 b3       	in	r24, 0x10	; 16
+ 2d0:	86 fb       	bst	r24, 6
+ 2d2:	88 27       	eor	r24, r24
+ 2d4:	80 f9       	bld	r24, 0
+ 2d6:	80 93 65 00 	sts	0x0065, r24	; 0x800065 <button2_state>
+			button3_state = (PIND & (1 << BUTTON3_PIN)) ? 1 : 0;
+ 2da:	80 b3       	in	r24, 0x10	; 16
+ 2dc:	82 95       	swap	r24
+ 2de:	81 70       	andi	r24, 0x01	; 1
+ 2e0:	80 93 64 00 	sts	0x0064, r24	; 0x800064 <__data_end>
+			//wewnetrzne podciaganie wejsc przez rezystory - przyciski aktywne stanem '0'
+
+			if(button3_state == 0)	// start/stop
+ 2e4:	80 91 64 00 	lds	r24, 0x0064	; 0x800064 <__data_end>
+ 2e8:	81 11       	cpse	r24, r1
+ 2ea:	1d c0       	rjmp	.+58     	; 0x326 <__vector_11+0xaa>
+			{
+				timer_on =!timer_on; //stan na przeciwny
+ 2ec:	80 91 69 00 	lds	r24, 0x0069	; 0x800069 <timer_on>
+ 2f0:	90 91 6a 00 	lds	r25, 0x006A	; 0x80006a <timer_on+0x1>
+ 2f4:	21 e0       	ldi	r18, 0x01	; 1
+ 2f6:	30 e0       	ldi	r19, 0x00	; 0
+ 2f8:	00 97       	sbiw	r24, 0x00	; 0
+ 2fa:	11 f0       	breq	.+4      	; 0x300 <__vector_11+0x84>
+ 2fc:	20 e0       	ldi	r18, 0x00	; 0
+ 2fe:	30 e0       	ldi	r19, 0x00	; 0
+ 300:	30 93 6a 00 	sts	0x006A, r19	; 0x80006a <timer_on+0x1>
+ 304:	20 93 69 00 	sts	0x0069, r18	; 0x800069 <timer_on>
+
+				if(!timer_on)	//timer wy³¹czamy - wylaczamy buzzer i ustawiamy 59:59
+ 308:	89 2b       	or	r24, r25
+ 30a:	69 f0       	breq	.+26     	; 0x326 <__vector_11+0xaa>
+				{
+					sterowanie &= ~(1<<BUZZER);
+ 30c:	aa 98       	cbi	0x15, 2	; 21
+					if(timer_sekundy == 0 )
+ 30e:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 312:	90 91 61 00 	lds	r25, 0x0061	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
+ 316:	89 2b       	or	r24, r25
+ 318:	31 f4       	brne	.+12     	; 0x326 <__vector_11+0xaa>
+						timer_sekundy = 59*60 + 59;
+ 31a:	8f e0       	ldi	r24, 0x0F	; 15
+ 31c:	9e e0       	ldi	r25, 0x0E	; 14
+ 31e:	90 93 61 00 	sts	0x0061, r25	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
+ 322:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
+				}
+			}
+ 
+ 			if(timer_on)
+ 326:	80 91 69 00 	lds	r24, 0x0069	; 0x800069 <timer_on>
+ 32a:	90 91 6a 00 	lds	r25, 0x006A	; 0x80006a <timer_on+0x1>
+ 32e:	89 2b       	or	r24, r25
+ 330:	b1 f5       	brne	.+108    	; 0x39e <__vector_11+0x122>
+ 				return;		//timer dziala,przyciski min/sec beda nieaktywne
+
+			int min, sec;
+			secondsToMinutesAndSeconds(timer_sekundy, &min, &sec);
+ 332:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 336:	90 91 61 00 	lds	r25, 0x0061	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
+	TCNT1 = (65536 - 15625) ;	//ustawiamy stan poczatkowy tak zeby odliczyc 15625 kroków
+
+}
+
+void secondsToMinutesAndSeconds(int totalSeconds, int *minutes, int *seconds) {
+	*minutes = totalSeconds / 60;   // Obliczanie minut (dzielenie ca³kowite)
+ 33a:	6c e3       	ldi	r22, 0x3C	; 60
+ 33c:	70 e0       	ldi	r23, 0x00	; 0
+ 33e:	0e 94 de 01 	call	0x3bc	; 0x3bc <__divmodhi4>
+ 342:	9b 01       	movw	r18, r22
+			int min, sec;
+			secondsToMinutesAndSeconds(timer_sekundy, &min, &sec);
+
+			//przyciski min/sec 
+			//dodajemy minute albo sekunde i przeliczamy wstepna wartosc timera - trzyman¹ w zmiennej timer_sekundy
+			if(button1_state == 0)
+ 344:	40 91 66 00 	lds	r20, 0x0066	; 0x800066 <button1_state>
+ 348:	41 11       	cpse	r20, r1
+ 34a:	13 c0       	rjmp	.+38     	; 0x372 <__vector_11+0xf6>
+			{
+				min++;
+ 34c:	2f 5f       	subi	r18, 0xFF	; 255
+ 34e:	3f 4f       	sbci	r19, 0xFF	; 255
+				if(min>59) min = 0;
+ 350:	2c 33       	cpi	r18, 0x3C	; 60
+ 352:	31 05       	cpc	r19, r1
+ 354:	14 f0       	brlt	.+4      	; 0x35a <__vector_11+0xde>
+ 356:	20 e0       	ldi	r18, 0x00	; 0
+ 358:	30 e0       	ldi	r19, 0x00	; 0
+				timer_sekundy = min*60 + sec;
+ 35a:	6c e3       	ldi	r22, 0x3C	; 60
+ 35c:	62 9f       	mul	r22, r18
+ 35e:	a0 01       	movw	r20, r0
+ 360:	63 9f       	mul	r22, r19
+ 362:	50 0d       	add	r21, r0
+ 364:	11 24       	eor	r1, r1
+ 366:	48 0f       	add	r20, r24
+ 368:	59 1f       	adc	r21, r25
+ 36a:	50 93 61 00 	sts	0x0061, r21	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
+ 36e:	40 93 60 00 	sts	0x0060, r20	; 0x800060 <__DATA_REGION_ORIGIN__>
+			}
+
+			if(button2_state == 0)
+ 372:	40 91 65 00 	lds	r20, 0x0065	; 0x800065 <button2_state>
+ 376:	41 11       	cpse	r20, r1
+ 378:	12 c0       	rjmp	.+36     	; 0x39e <__vector_11+0x122>
+			{
+				sec++;
+ 37a:	01 96       	adiw	r24, 0x01	; 1
+				if(sec>59) sec = 0;
+ 37c:	8c 33       	cpi	r24, 0x3C	; 60
+ 37e:	91 05       	cpc	r25, r1
+ 380:	14 f0       	brlt	.+4      	; 0x386 <__vector_11+0x10a>
+ 382:	80 e0       	ldi	r24, 0x00	; 0
+ 384:	90 e0       	ldi	r25, 0x00	; 0
+				timer_sekundy = min*60 + sec;
+ 386:	6c e3       	ldi	r22, 0x3C	; 60
+ 388:	62 9f       	mul	r22, r18
+ 38a:	a0 01       	movw	r20, r0
+ 38c:	63 9f       	mul	r22, r19
+ 38e:	50 0d       	add	r21, r0
+ 390:	11 24       	eor	r1, r1
+ 392:	84 0f       	add	r24, r20
+ 394:	95 1f       	adc	r25, r21
+ 396:	90 93 61 00 	sts	0x0061, r25	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
+ 39a:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
+			}
+		}
+ 39e:	bf 91       	pop	r27
+ 3a0:	af 91       	pop	r26
+ 3a2:	9f 91       	pop	r25
+ 3a4:	8f 91       	pop	r24
+ 3a6:	7f 91       	pop	r23
+ 3a8:	6f 91       	pop	r22
+ 3aa:	5f 91       	pop	r21
+ 3ac:	4f 91       	pop	r20
+ 3ae:	3f 91       	pop	r19
+ 3b0:	2f 91       	pop	r18
+ 3b2:	0f 90       	pop	r0
+ 3b4:	0f be       	out	0x3f, r0	; 63
+ 3b6:	0f 90       	pop	r0
+ 3b8:	1f 90       	pop	r1
+ 3ba:	18 95       	reti
+
+000003bc <__divmodhi4>:
+ 3bc:	97 fb       	bst	r25, 7
+ 3be:	07 2e       	mov	r0, r23
+ 3c0:	16 f4       	brtc	.+4      	; 0x3c6 <__divmodhi4+0xa>
+ 3c2:	00 94       	com	r0
+ 3c4:	07 d0       	rcall	.+14     	; 0x3d4 <__divmodhi4_neg1>
+ 3c6:	77 fd       	sbrc	r23, 7
+ 3c8:	09 d0       	rcall	.+18     	; 0x3dc <__divmodhi4_neg2>
+ 3ca:	0e 94 f2 01 	call	0x3e4	; 0x3e4 <__udivmodhi4>
+ 3ce:	07 fc       	sbrc	r0, 7
+ 3d0:	05 d0       	rcall	.+10     	; 0x3dc <__divmodhi4_neg2>
+ 3d2:	3e f4       	brtc	.+14     	; 0x3e2 <__divmodhi4_exit>
+
+000003d4 <__divmodhi4_neg1>:
+ 3d4:	90 95       	com	r25
+ 3d6:	81 95       	neg	r24
+ 3d8:	9f 4f       	sbci	r25, 0xFF	; 255
+ 3da:	08 95       	ret
+
+000003dc <__divmodhi4_neg2>:
+ 3dc:	70 95       	com	r23
+ 3de:	61 95       	neg	r22
+ 3e0:	7f 4f       	sbci	r23, 0xFF	; 255
+
+000003e2 <__divmodhi4_exit>:
+ 3e2:	08 95       	ret
+
+000003e4 <__udivmodhi4>:
+ 3e4:	aa 1b       	sub	r26, r26
+ 3e6:	bb 1b       	sub	r27, r27
+ 3e8:	51 e1       	ldi	r21, 0x11	; 17
+ 3ea:	07 c0       	rjmp	.+14     	; 0x3fa <__udivmodhi4_ep>
+
+000003ec <__udivmodhi4_loop>:
+ 3ec:	aa 1f       	adc	r26, r26
+ 3ee:	bb 1f       	adc	r27, r27
+ 3f0:	a6 17       	cp	r26, r22
+ 3f2:	b7 07       	cpc	r27, r23
+ 3f4:	10 f0       	brcs	.+4      	; 0x3fa <__udivmodhi4_ep>
+ 3f6:	a6 1b       	sub	r26, r22
+ 3f8:	b7 0b       	sbc	r27, r23
+
+000003fa <__udivmodhi4_ep>:
+ 3fa:	88 1f       	adc	r24, r24
+ 3fc:	99 1f       	adc	r25, r25
+ 3fe:	5a 95       	dec	r21
+ 400:	a9 f7       	brne	.-22     	; 0x3ec <__udivmodhi4_loop>
+ 402:	80 95       	com	r24
+ 404:	90 95       	com	r25
+ 406:	bc 01       	movw	r22, r24
+ 408:	cd 01       	movw	r24, r26
+ 40a:	08 95       	ret
+
+0000040c <__itoa_ncheck>:
+ 40c:	bb 27       	eor	r27, r27
+ 40e:	4a 30       	cpi	r20, 0x0A	; 10
+ 410:	31 f4       	brne	.+12     	; 0x41e <__itoa_ncheck+0x12>
+ 412:	99 23       	and	r25, r25
+ 414:	22 f4       	brpl	.+8      	; 0x41e <__itoa_ncheck+0x12>
+ 416:	bd e2       	ldi	r27, 0x2D	; 45
+ 418:	90 95       	com	r25
+ 41a:	81 95       	neg	r24
+ 41c:	9f 4f       	sbci	r25, 0xFF	; 255
+ 41e:	0c 94 12 02 	jmp	0x424	; 0x424 <__utoa_common>
+
+00000422 <__utoa_ncheck>:
+ 422:	bb 27       	eor	r27, r27
+
+00000424 <__utoa_common>:
+ 424:	fb 01       	movw	r30, r22
+ 426:	55 27       	eor	r21, r21
+ 428:	aa 27       	eor	r26, r26
+ 42a:	88 0f       	add	r24, r24
+ 42c:	99 1f       	adc	r25, r25
+ 42e:	aa 1f       	adc	r26, r26
+ 430:	a4 17       	cp	r26, r20
+ 432:	10 f0       	brcs	.+4      	; 0x438 <__utoa_common+0x14>
+ 434:	a4 1b       	sub	r26, r20
+ 436:	83 95       	inc	r24
+ 438:	50 51       	subi	r21, 0x10	; 16
+ 43a:	b9 f7       	brne	.-18     	; 0x42a <__utoa_common+0x6>
+ 43c:	a0 5d       	subi	r26, 0xD0	; 208
+ 43e:	aa 33       	cpi	r26, 0x3A	; 58
+ 440:	08 f0       	brcs	.+2      	; 0x444 <__utoa_common+0x20>
+ 442:	a9 5d       	subi	r26, 0xD9	; 217
+ 444:	a1 93       	st	Z+, r26
+ 446:	00 97       	sbiw	r24, 0x00	; 0
+ 448:	79 f7       	brne	.-34     	; 0x428 <__utoa_common+0x4>
+ 44a:	b1 11       	cpse	r27, r1
+ 44c:	b1 93       	st	Z+, r27
+ 44e:	11 92       	st	Z+, r1
+ 450:	cb 01       	movw	r24, r22
+ 452:	0c 94 2b 02 	jmp	0x456	; 0x456 <strrev>
+
+00000456 <strrev>:
+ 456:	dc 01       	movw	r26, r24
+ 458:	fc 01       	movw	r30, r24
+ 45a:	67 2f       	mov	r22, r23
+ 45c:	71 91       	ld	r23, Z+
+ 45e:	77 23       	and	r23, r23
+ 460:	e1 f7       	brne	.-8      	; 0x45a <strrev+0x4>
+ 462:	32 97       	sbiw	r30, 0x02	; 2
+ 464:	04 c0       	rjmp	.+8      	; 0x46e <strrev+0x18>
+ 466:	7c 91       	ld	r23, X
+ 468:	6d 93       	st	X+, r22
+ 46a:	70 83       	st	Z, r23
+ 46c:	62 91       	ld	r22, -Z
+ 46e:	ae 17       	cp	r26, r30
+ 470:	bf 07       	cpc	r27, r31
+ 472:	c8 f3       	brcs	.-14     	; 0x466 <strrev+0x10>
+ 474:	08 95       	ret
+
+00000476 <_exit>:
+ 476:	f8 94       	cli
+
+00000478 <__stop_program>:
+ 478:	ff cf       	rjmp	.-2      	; 0x478 <__stop_program>
